@@ -3,6 +3,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { IconButton} from "@mui/material";
+import { grey } from '@mui/material/colors';
 
 export const Stopwatch = () => {
   // state to store time
@@ -42,7 +43,7 @@ export const Stopwatch = () => {
     setTime(0);
   };
   return (
-    <div className="fixed top-1/2 inset-x-0 max-w-max mx-auto -mt-7 bg-bg-800 rounded-lg p-2 text-red-400" style={{fontFamily: "Nanum Gothic"}} >
+    <div className="fixed bottom-3 left-3 bg-bg-800 rounded-lg p-0.5 text-white" style={{fontFamily: "Nanum Gothic"}} >
       <p className="text-xl">
         {hours}:{minutes.toString().padStart(2, "0")}:
         {seconds.toString().padStart(2, "0")}:
@@ -50,10 +51,10 @@ export const Stopwatch = () => {
       </p>
       <div className="stopwatch-buttons flex justify-around">
         <IconButton size="small" variant="contained" className="stopwatch-button" onClick={startAndStop}>
-          {isRunning ? <PauseIcon/> : <PlayArrowIcon />}
+          {isRunning ? <PauseIcon sx={{color: grey[50] }}/> : <PlayArrowIcon sx={{color: grey[50] }} />}
         </IconButton>
         <IconButton size="small" variant="contained" className="stopwatch-button" onClick={reset}>
-          <RestartAltIcon/>
+          <RestartAltIcon sx={{color: grey[50] }} />
         </IconButton>
       </div>
     </div>

@@ -1,8 +1,12 @@
 import { Times } from './components/Times';
 import { Stopwatch } from './components/Timer';
 import  NoSleep  from "nosleep.js";
-import { useEffect } from 'react';
+import { useEffect, useReducer } from 'react';
+import { Reducer, initialState } from './components/UseReducer';
+import { Reset } from './components/Reset'
 function App() {
+  const [state, dispatch] = useReducer(Reducer, initialState);
+  window.addEventListener('beforeunload', () => localStorage.setItem('score', JSON.stringify(state)));
   useEffect(() => {
     let isEnableNoSleep = false;
     const noSleep = new NoSleep();
@@ -12,7 +16,6 @@ function App() {
         document.removeEventListener(`click`, enableNoSleep, false);
         noSleep.enable();
         isEnableNoSleep = true;
-        alert(`click and enable noSleep`);
       },
       false
     );
@@ -24,8 +27,9 @@ function App() {
   }, []);
   return (
     <div className="App font-mono">
-      <Times></Times>
+      <Times state={state} dispatch={dispatch}></Times>
       <Stopwatch></Stopwatch>
+      <Reset dispatch={dispatch}></Reset>
     </div>
   );
 }
